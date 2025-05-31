@@ -1,0 +1,574 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Base */
+body {
+    /* === Applied Purple Theme Gradient === */
+    background: linear-gradient(135deg, #3d2645, #bda2c8);
+    font-family: 'Roboto', sans-serif;
+    /* === Applied Purple Theme Text Color === */
+    color: #f0f0f0;
+    margin: 0;
+    padding: 15px 0;
+    min-height: 100vh;
+}
+
+.my-container {
+    /* === Applied Purple Theme Container Style === */
+    background: rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 1100px;
+    /* Kept width from original AQ CSS */
+    margin: 20px auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    position: relative;
+}
+
+/* Header */
+.header {
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    /* === Removed Border === */
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.25); */
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2.4em;
+    font-weight: 700;
+    /* === Applied Purple Theme Header Color === */
+    color: #ffd6ff;
+    margin-bottom: 0.5rem;
+}
+
+.header p.lead {
+    font-size: 1.1em;
+    /* === Applied Purple Theme Base Text Color === */
+    color: #f0f0f0;
+}
+
+.spinning-icon {
+    /* === Applied Purple Theme Icon Color === */
+    color: #ffd6ff;
+    animation: spin 6s linear infinite;
+    /* Adjusted speed */
+    margin-right: 12px;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Sezione Ricerca */
+#searchSection {
+    /* === Adjusted Search Section Border/Background === */
+    border: 1px solid rgba(255, 214, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    padding: 1.25rem 1.75rem;
+}
+
+#searchSection .form-label {
+    font-weight: 500;
+    color: #f0f0f0;
+    /* Theme text color */
+    margin-bottom: 0.3rem;
+}
+
+#searchSection .form-control,
+#searchSection .form-select {
+    /* === Adjusted Input Background/Border/Text === */
+    background-color: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 214, 255, 0.3);
+    color: #f0f0f0;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+#searchSection .form-control::placeholder {
+    color: #bdbdbd;
+    /* Lighter placeholder */
+}
+
+#searchSection .form-control:focus,
+#searchSection .form-select:focus {
+    /* === Adjusted Input Focus Style === */
+    background-color: rgba(0, 0, 0, 0.4);
+    border-color: #ff006e;
+    box-shadow: 0 0 0 0.25rem rgba(255, 0, 110, 0.3);
+    color: #f0f0f0;
+}
+
+#searchSection .btn {
+    padding: 0.6rem 1rem;
+    font-size: 1em;
+    border: none;
+    /* Remove border */
+}
+
+/* === Primary Button (Search) - Applied Purple Theme Style === */
+#searchSection .btn-primary {
+    background-color: #ff006e;
+    border: none;
+    color: #f0f0f0;
+}
+
+#searchSection .btn-primary:hover {
+    background-color: #d10057;
+    box-shadow: 0 0 10px rgba(255, 0, 110, 0.5);
+}
+
+/* === Info Button (Geo) - Adjusted Style === */
+#searchSection .btn-info {
+    background-color: #9c7cac;
+    border: none;
+    color: #f0f0f0;
+}
+
+#searchSection .btn-info:hover {
+    background-color: #816391;
+    box-shadow: 0 0 8px rgba(189, 162, 200, 0.4);
+}
+
+/* Layout Mappa e Risultati */
+.map-container-full-width .map-title {
+    color: #ffd6ff;
+    /* Theme header color */
+    font-weight: 500;
+}
+
+#map {
+    height: 550px;
+    width: 100%;
+    border-radius: 10px;
+    /* === Adjusted Map Border/Background === */
+    border: 1px solid rgba(255, 214, 255, 0.2);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    background-color: #3d2645;
+    /* Dark purple from gradient */
+}
+
+/* === Map Popup Styling - Applied Theme === */
+.leaflet-popup-content-wrapper {
+    background: rgba(44, 44, 44, 0.95);
+    /* Dark grey from theme modals */
+    color: #f0f0f0;
+    /* Theme text color */
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 214, 255, 0.3);
+    /* Subtle pink border */
+}
+
+.leaflet-popup-content {
+    margin: 12px 15px;
+    font-size: 0.95em;
+    line-height: 1.6;
+    max-width: 280px !important;
+}
+
+.leaflet-popup-tip {
+    background: rgba(44, 44, 44, 0.95);
+    /* Match popup wrapper */
+}
+
+.leaflet-popup-content hr {
+    border-top: 1px solid rgba(255, 214, 255, 0.4);
+    /* Lighter pinkish line */
+}
+
+/* === Leaflet Controls Styling === */
+.leaflet-control-zoom a {
+    background-color: rgba(44, 44, 44, 0.8);
+    /* Dark background */
+    color: #ffd6ff;
+    /* Pink icons */
+    border-radius: 4px;
+    border: 1px solid rgba(255, 214, 255, 0.3);
+}
+
+.leaflet-control-zoom a:hover {
+    background-color: rgba(60, 60, 60, 0.9);
+    color: #ff006e;
+    /* Brighter pink on hover */
+}
+
+.aqi-circle-overlay {
+    pointer-events: auto !important;
+    cursor: pointer;
+}
+
+/* === Legenda Mappa Styling - Applied Theme === */
+#mapLegend {
+    padding: 6px 10px;
+    background: rgba(0, 0, 0, 0.7);
+    /* Slightly darker legend bg */
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid rgba(255, 214, 255, 0.15);
+    /* Subtle pink border */
+}
+
+#mapLegend h6 {
+    margin-bottom: 4px;
+    font-size: 0.8rem;
+    color: #ffd6ff;
+    /* Theme header color */
+    font-weight: 500;
+}
+
+.legend-item {
+    display: inline-block;
+    font-size: 0.75em;
+    padding: 3px 8px;
+    /* Slightly more padding */
+    margin: 2px;
+    font-weight: 500;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    /* Background/Text color should be set by JS based on AQI level */
+    /* Example fallback: */
+    background-color: #555;
+    color: #f0f0f0;
+}
+
+/* Sezione Risultati SOTTO la mappa */
+.results-section {
+    /* === Adjusted Results Section Style === */
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 214, 255, 0.2);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    /* Visibility/Transition kept from original AQ CSS */
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease-out, max-height 0.6s ease-out, margin-top 0.5s ease-out, padding-top 0.5s ease-out, padding-bottom 0.5s ease-out;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.results-section.visible {
+    opacity: 1;
+    max-height: 80vh;
+    /* Kept max-height limit */
+    overflow-y: auto;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    margin-top: 2rem;
+}
+
+.results-section h3 {
+    /* === Applied Purple Theme Header Color, Removed Border === */
+    color: #ffd6ff;
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.25); */
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.25rem;
+    text-align: center;
+}
+
+#resultsPlaceholder {
+    opacity: 0.7;
+    display: block;
+    color: #bda2c8;
+    /* Theme lighter purple */
+}
+
+.results-section:not(:empty) #resultsPlaceholder {
+    display: none;
+}
+
+
+/* === Highlights Dati Attuali Styling - Applied Theme === */
+#currentAQIHighlights {
+    background-color: rgba(0, 0, 0, 0.3);
+    /* Consistent dark bg */
+    border: 1px solid rgba(255, 214, 255, 0.15);
+    /* Subtle pink border */
+    border-radius: 8px;
+    color: #f0f0f0;
+    /* Theme text color */
+}
+
+.current-highlights-box .highlight-title {
+    color: #ffd6ff;
+    /* Theme header color */
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+.aqi-display-lg .aqi-label {
+    font-size: 1em;
+    color: #f0f0f0;
+    /* Theme text color */
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.aqi-display-lg .aqi-value-box {
+    font-size: 3em;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    display: inline-block;
+    min-width: 90px;
+    margin-bottom: 0.3rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    line-height: 1;
+    /* Background/Text color should be set by JS based on AQI value */
+    /* Example fallback: */
+    background-color: #555;
+    color: #f0f0f0;
+    border: 1px solid rgba(255, 214, 255, 0.3);
+}
+
+.aqi-display-lg .aqi-desc {
+    font-size: 1.3em;
+    font-weight: 500;
+    margin-top: 0.2rem;
+    /* Text color should be set by JS based on AQI level */
+    /* Example fallback: */
+    color: #f0f0f0;
+}
+
+/* === Pollutant Grid Styling - Applied Theme === */
+.pollutant-grid-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 0.7rem;
+    font-size: 1.05em;
+    text-align: left;
+}
+
+.pollutant-grid-highlights div {
+    background-color: rgba(0, 0, 0, 0.2);
+    /* Darker item background */
+    padding: 0.6rem 0.9rem;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 214, 255, 0.1);
+    /* Very subtle pink border */
+}
+
+.pollutant-grid-highlights span.pollutant-label {
+    color: #ffd6ff;
+    /* Pinkish label */
+    margin-right: 0.5rem;
+}
+
+.pollutant-grid-highlights strong.pollutant-value {
+    color: #f0f0f0;
+    /* White value */
+    font-weight: 500;
+}
+
+.pollutant-grid-highlights small {
+    font-size: 0.8em;
+    color: #bda2c8;
+    /* Lighter purple unit */
+    margin-left: 3px;
+}
+
+/* === Tabella dati orari Styling - Applied Theme === */
+.aq-table-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid rgba(255, 214, 255, 0.2);
+    /* Pinkish border */
+    border-radius: 6px;
+    margin-top: 1.5rem;
+}
+
+.hourly-aq-table {
+    margin-bottom: 0;
+    background-color: transparent;
+    border: none;
+    font-size: 0.9em;
+    color: #f0f0f0;
+    /* Ensure base text color */
+}
+
+.hourly-aq-table thead th {
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Dark header */
+    border-bottom: 2px solid rgba(255, 214, 255, 0.3);
+    /* Pinkish bottom border */
+    color: #ffd6ff;
+    /* Pinkish header text */
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.6rem 0.5rem;
+    font-weight: 500;
+    white-space: normal;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.hourly-aq-table tbody td {
+    border-color: rgba(255, 214, 255, 0.15);
+    /* Subtle pink grid lines */
+    vertical-align: middle;
+    padding: 0.5rem;
+    white-space: nowrap;
+}
+
+.hourly-aq-table tbody tr:hover {
+    background-color: rgba(255, 0, 110, 0.1);
+    /* Subtle pink hover */
+}
+
+/* Cells colored by JS for AQI should ensure contrast */
+.hourly-aq-table td[style*="background-color"] {
+    font-weight: 500;
+    /* Consider adding a subtle text shadow for contrast if JS sets light backgrounds */
+    /* text-shadow: 1px 1px 1px rgba(0,0,0,0.4); */
+}
+
+/* === Contenitore Grafico Styling - Applied Theme === */
+.chart-container {
+    border: 1px solid rgba(255, 214, 255, 0.15);
+    /* Subtle pink border */
+    margin-top: 2rem;
+    padding: 1rem 1.5rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    /* Dark bg */
+    border-radius: 8px;
+    position: relative;
+    height: 350px;
+}
+
+.chart-container h4 {
+    color: #ffd6ff;
+    /* Pinkish title */
+    font-size: 1.2em;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+#airQualityChart {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Loader Globale */
+#loadingSpinner {
+    color: #ffd6ff;
+    /* Theme color */
+    text-align: center;
+}
+
+#loadingSpinner .spinner-border {
+    border-color: currentColor;
+    border-right-color: transparent;
+}
+
+/* === Modal Styling - Applied Purple Theme Style === */
+.custom-modal-content {
+    background: #262626;
+    color: #f7f7f7;
+    border-radius: 10px;
+    border: none;
+    /* Removed border */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
+}
+
+.custom-modal-header {
+    border-bottom: none;
+    /* Removed border */
+    background: #1f1f1f;
+    color: #f0f0f0;
+}
+
+.custom-modal-header .btn-close-white {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.custom-modal-footer {
+    border-top: none;
+    /* Removed border */
+    background: #1f1f1f;
+}
+
+.custom-modal-body {
+    background: #262626;
+    color: #f7f7f7;
+    padding: 1.5rem;
+}
+
+/* Responsive (Kept from original AQ CSS) */
+@media (max-width: 992px) {
+    .map-column .sticky-lg-top {
+        position: static;
+    }
+
+    .results-section {
+        max-height: none;
+        overflow-y: visible;
+    }
+}
+
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2em;
+    }
+
+    .my-container {
+        margin: 15px;
+        padding: 20px;
+    }
+
+    #map {
+        height: 350px;
+    }
+}
+
+@media (max-width: 576px) {
+    .header h1 {
+        font-size: 1.8em;
+    }
+
+    .my-container {
+        padding: 15px;
+    }
+
+    #searchSection .btn {
+        font-size: 0.9em;
+        padding: 0.375rem 0.75rem;
+    }
+
+    #searchSection .form-label {
+        font-size: 0.9em;
+    }
+
+    #map {
+        height: 300px;
+    }
+
+    .results-section {
+        padding: 1rem;
+    }
+
+    .hourly-aq-table {
+        font-size: 0.8em;
+    }
+
+    .pollutant-grid-highlights {
+        grid-template-columns: 1fr;
+    }
+
+    .aqi-display-lg .aqi-value-box {
+        font-size: 2.4em;
+    }
+
+    .aqi-display-lg .aqi-desc {
+        font-size: 1.1em;
+    }
+}

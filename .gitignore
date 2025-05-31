@@ -1,0 +1,12 @@
+.DS_Store
+Thumbs.db
+ehthumbs.db
+config.local.php
+*.log
+logs/
+cache/
+temp/
+tmp/
+.vscode/
+.idea/
+nbproject/

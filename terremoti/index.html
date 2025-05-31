@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Geo Shock Italia</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <!-- Intro.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/5.1.0/introjs.min.css" />
+
+    <!-- Chart.js, moment, adapter per Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <!-- Non includiamo l'adapter se non viene usato attivamente nella creazione del grafico -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.0"></script> -->
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <!-- Intro.js JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/5.1.0/intro.min.js"></script>
+
+    <!-- Librerie per PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+    <!-- CSS Personalizzato (IL TUO CSS ORIGINALE) -->
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+    <!-- Modal per Messaggi (POPUP) -->
+    <div class="modal fade" id="alertModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static"
+        data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content custom-modal-content">
+                <div class="modal-header custom-modal-header">
+                    <h5 class="modal-title" id="alertModalLabel">Messaggio</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        id="closeModalBtn"></button>
+                </div>
+                <div class="modal-body custom-modal-body" id="alertModalBody">
+                    <!-- Testo del messaggio -->
+                </div>
+                <div class="modal-footer custom-modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Chiudi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fine Modal -->
+
+    <div class="container my-container">
+        <div class="header text-center">
+            <h1 data-intro="Benvenuto su Geo Shock Italia! Questo è il titolo del sito." data-step="1">
+                <i class="fas fa-chart-line spinning-icon"></i> Geo Shock Italia
+            </h1>
+            <button class="btn btn-info mt-3" id="restartTutorial">
+                Avvia Tutorial Interattivo
+            </button>
+        </div>
+
+        <!-- Form di ricerca -->
+        <form id="earthquakeForm" class="needs-validation" novalidate>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="startTime" class="form-label"
+                        data-intro="Seleziona la data e l'ora di inizio della ricerca." data-step="2">
+                        Data e Ora Inizio
+                    </label>
+                    <input type="datetime-local" class="form-control" id="startTime" required />
+                </div>
+                <div class="col-md-6">
+                    <label for="endTime" class="form-label"
+                        data-intro="Seleziona la data e l'ora di fine della ricerca." data-step="3">
+                        Data e Ora Fine
+                    </label>
+                    <input type="datetime-local" class="form-control" id="endTime" required max="" />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="minMagnitude" class="form-label" data-intro="Inserisci la magnitudo minima (es. 2.5)."
+                        data-step="4">
+                        Magnitudo Minima
+                    </label>
+                    <input type="number" step="0.1" class="form-control" id="minMagnitude" required
+                        placeholder="Es: 2.5" />
+                </div>
+                <div class="col-md-6">
+                    <label for="radius" class="form-label"
+                        data-intro="Seleziona il raggio di ricerca intorno al punto scelto." data-step="5">
+                        Raggio Ricerca (km)
+                    </label>
+                    <select class="form-select" id="radius" required>
+                        <option value="20" selected>20 km</option>
+                        <option value="50">50 km</option>
+                        <option value="100">100 km</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="location" class="form-label"
+                    data-intro="Clicca sulla mappa per selezionare il centro della tua area di ricerca." data-step="6">
+                    Centro Ricerca (Clicca sulla Mappa)
+                </label>
+                <div id="map"
+                    data-intro="Usa questa mappa interattiva per scegliere il punto. Puoi zoomare e trascinare."
+                    data-step="7" style="height: 400px;"></div>
+                <input type="hidden" id="latitude" required />
+                <input type="hidden" id="longitude" required />
+                <input type="hidden" id="locationName" />
+                <div id="selectedLocation" class="mt-3">
+                    <!-- Qui verranno mostrati i dettagli della località selezionata -->
+                </div>
+                <small class="form-text text-muted">
+                    <i class="fas fa-info-circle"></i> Nota: La ricerca è ottimizzata per l'Italia. Seleziona un punto
+                    entro i confini nazionali.
+                </small>
+            </div>
+
+            <div id="locationInfo" class="mt-4"></div>
+
+            <button type="submit" class="btn btn-primary"
+                data-intro="Premi qui per avviare la ricerca con i parametri impostati." data-step="8">
+                <i class="fas fa-search"></i> Cerca Terremoti
+            </button>
+
+            <button type="button" class="btn btn-danger mt-3 ms-2" id="resetButton" style="display: none;">
+                <i class="fas fa-redo"></i> Nuova Ricerca
+            </button>
+
+            <button type="button" class="btn btn-success mt-3 ms-2" id="exportCSVBtn" style="display: none;">
+                <i class="fas fa-file-csv"></i> Esporta CSV
+            </button>
+
+            <button type="button" class="btn btn-warning mt-3 ms-2" id="exportPDFBtn" style="display: none;">
+                <i class="fas fa-file-pdf"></i> Esporta PDF
+            </button>
+        </form>
+
+        <!-- Spinner di caricamento -->
+        <div class="spinner-border text-primary spinner" role="status" id="spinner" style="display: none;">
+            <span class="visually-hidden">Caricamento...</span>
+        </div>
+
+        <!-- Contenitore statistiche -->
+        <div id="statsContainer" class="mt-5">
+            <!-- Le statistiche verranno caricate qui -->
+        </div>
+        <!-- Interpretazione automatica -->
+        <div id="interpretationContainer" class="mt-3">
+            <!-- L'interpretazione verrà caricata qui -->
+        </div>
+
+        <!-- Sezione bottoni "Legenda", "Guida", "Informazioni" -->
+        <div class="container mt-5 text-center">
+            <div class="row g-2">
+                <div class="col-12 col-md-4">
+                    <button class="btn btn-secondary w-100" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#legend" aria-expanded="false" aria-controls="legend">
+                        <i class="fas fa-tags"></i> Legenda Statistiche
+                    </button>
+                </div>
+                <div class="col-12 col-md-4">
+                    <button class="btn btn-secondary w-100" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#instructionGuide" aria-expanded="false" aria-controls="instructionGuide">
+                        <i class="fas fa-book-open"></i> Guida Rapida
+                    </button>
+                </div>
+                <div class="col-12 col-md-4">
+                    <button class="btn btn-secondary w-100" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#info" aria-expanded="false" aria-controls="info">
+                        <i class="fas fa-info-circle"></i> Info sul Sito e Dati
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legenda Statistiche (Contenuto invariato) -->
+        <div class="collapse" id="legend">
+            <div class="card card-body mt-3">
+                <h6><i class="fas fa-tags"></i> Legenda delle Statistiche</h6>
+                <p><strong>Numero totale di terremoti:</strong> Il numero totale di eventi sismici registrati nell'area
+                    e periodo selezionati.</p>
+                <p><strong>Magnitudo massima:</strong> La magnitudo più alta registrata tra gli eventi trovati.</p>
+                <p><strong>Magnitudo minima:</strong> La magnitudo più bassa registrata.</p>
+                <p><strong>Magnitudo media:</strong> La media matematica delle magnitudo di tutti gli eventi.</p>
+                <p><strong>Deviazione standard della magnitudo:</strong> Misura di quanto le magnitudo si discostano
+                    dalla media (dispersione).</p>
+                <p><strong>Profondità media:</strong> La profondità media (in km) a cui sono avvenuti i terremoti.</p>
+                <p><strong>Ora del giorno più comune:</strong> La fascia oraria (es. 14:00-15:00) in cui si è registrato
+                    il maggior numero di eventi.</p>
+                <p><strong>Numero di terremoti ultimi 30 giorni:</strong> Conteggio eventi avvenuti negli ultimi 30
+                    giorni rispetto alla data di fine ricerca.</p>
+                <p><strong>Numero di terremoti ultimo anno:</strong> Conteggio eventi avvenuti nell'ultimo anno rispetto
+                    alla data di fine ricerca.</p>
+            </div>
+        </div>
+
+        <!-- === GUIDA ALL'USO MIGLIORATA === -->
+        <div class="collapse" id="instructionGuide">
+            <div class="card card-body mt-3">
+                <h6><i class="fas fa-book-open"></i> Guida Rapida all'Uso</h6>
+                <p>Questo strumento ti permette di cercare e visualizzare i terremoti registrati dall'INGV in una
+                    specifica area e periodo. Ecco come usarlo:</p>
+                <ol>
+                    <li>
+                        <strong>1. Definisci il Periodo:</strong><br>
+                        Imposta "Data e Ora Inizio" e "Data e Ora Fine" per la tua ricerca.
+                        <br><em>Limiti:</em> Inizio non prima del 01/01/2023, Fine non futura, Inizio prima di Fine.
+                    </li>
+                    <li>
+                        <strong>2. Scegli la Magnitudo Minima:</strong><br>
+                        Indica la magnitudo minima degli eventi che vuoi visualizzare (es. `2.0` per eventi molto
+                        leggeri, `3.5` per eventi generalmente avvertibili).
+                    </li>
+                    <li>
+                        <strong>3. Seleziona l'Area di Ricerca:</strong>
+                        <ul>
+                            <li><strong>Clicca sulla Mappa:</strong> Seleziona il punto centrale per la tua ricerca.
+                                Apparirà un marker che puoi anche trascinare per aggiustare la posizione.</li>
+                            <li><strong>Scegli il Raggio:</strong> Seleziona dal menu "Raggio Ricerca" quanto estendere
+                                la ricerca attorno al punto scelto (20, 50, o 100 km).</li>
+                        </ul>
+                        <em>Nota:</em> La ricerca funziona al meglio entro i confini italiani.
+                    </li>
+                    <li>
+                        <strong>4. Avvia la Ricerca:</strong><br>
+                        Premi il pulsante <button type="button" class="btn btn-primary btn-sm py-0 disabled"><i
+                                class="fas fa-search"></i> Cerca Terremoti</button>. Attendi il caricamento dei dati.
+                    </li>
+                    <li>
+                        <strong>5. Esplora i Risultati:</strong><br>
+                        Verranno visualizzati diversi elementi:
+                        <ul>
+                            <li><strong>Mappa:</strong> Un cerchio indica l'area di ricerca. I pallini colorati
+                                rappresentano i terremoti (dimensione/colore = magnitudo). Clicca sui pallini per
+                                dettagli.</li>
+                            <li><strong>Grafico:</strong> Mostra magnitudo e profondità nel tempo. Puoi filtrare
+                                cliccando sulla legenda.</li>
+                            <li><strong>Tabella:</strong> Elenco dettagliato degli eventi, ordinabile cliccando sulle
+                                intestazioni (Data, Magn., ecc.).</li>
+                            <li><strong>Statistiche:</strong> Riepilogo numerico (totale eventi, medie, massimi, ecc.).
+                                Consulta la "Legenda Statistiche" per i dettagli.</li>
+                            <li><strong>Interpretazione Automatica:</strong> Una sintesi testuale che evidenzia i punti
+                                salienti dell'analisi.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>6. Azioni Aggiuntive:</strong>
+                        <ul>
+                            <li><button type="button" class="btn btn-success btn-sm py-0 disabled"><i
+                                        class="fas fa-file-csv"></i> Esporta CSV</button>: Scarica i dati della tabella
+                                in formato CSV (per Excel, ecc.).</li>
+                            <li><button type="button" class="btn btn-warning btn-sm py-0 disabled"><i
+                                        class="fas fa-file-pdf"></i> Esporta PDF</button>: Genera un report PDF con
+                                grafici e dati.</li>
+                            <li><button type="button" class="btn btn-danger btn-sm py-0 disabled"><i
+                                        class="fas fa-redo"></i> Nuova Ricerca</button>: Pulisce tutto per iniziare una
+                                nuova analisi.</li>
+                            <li><button type="button" class="btn btn-info btn-sm py-0 disabled">Avvia Tutorial
+                                    Interattivo</button>: Ripercorre questi passi sull'interfaccia.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p><em>Buona esplorazione!</em></p>
+            </div>
+        </div>
+        <!-- === FINE GUIDA MIGLIORATA === -->
+
+        <!-- Informazioni sul sito (Contenuto invariato) -->
+        <div class="collapse" id="info">
+            <div class="card card-body mt-3">
+                <h6><i class="fas fa-info-circle"></i> Informazioni sul Sito e Dati</h6>
+                <p>
+                    <strong>Geo Shock Italia</strong> è uno strumento web per visualizzare e analizzare dati relativi ai
+                    terremoti avvenuti sul territorio italiano.
+                </p>
+                <p>
+                    <strong>Fonte Dati:</strong> I dati sismici presentati sono ottenuti in tempo reale interrogando i
+                    servizi web (API) ufficiali forniti dall'<strong>Istituto Nazionale di Geofisica e Vulcanologia
+                        (INGV)</strong>. Si ringrazia INGV per la disponibilità dei dati aperti.
+                </p>
+                <p>
+                    <strong>Servizi Web INGV Utilizzati:</strong>
+                </p>
+                <ul>
+                    <li>Servizio Principale: <a href="https://webservices.ingv.it/fdsnws/event/1/" target="_blank"
+                            rel="noopener noreferrer">FDSNWS Event Query</a></li>
+                    <li>Documentazione API INGV: <a href="https://terremoti.ingv.it/webservices_and_software"
+                            target="_blank" rel="noopener noreferrer">Web Services INGV</a></li>
+                </ul>
+                <p><small>Questo sito è uno strumento indipendente e non è affiliato ufficialmente con INGV. I dati sono
+                        presentati "così come sono" forniti dalla fonte.</small></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grafico -->
+    <div class="chart-container" id="chartContainer">
+        <canvas id="earthquakeChart" style="display: none;"></canvas>
+    </div>
+
+    <!-- Tabella risultati -->
+    <div id="tableContainer" class="table-responsive">
+        <!-- La tabella verrà caricata qui -->
+    </div>
+
+    <!-- Bootstrap JS bundle, poi alerts.js, poi scripts.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="alerts.js"></script>
+    <script src="scripts.js"></script>
+
+    <!-- Script Intro.js per guida (STEP AGGIORNATI) -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var legendButton = document.querySelector('[data-bs-target="#legend"]');
+            var instructionButton = document.querySelector('[data-bs-target="#instructionGuide"]'); // ID aggiornato
+            var infoButton = document.querySelector('[data-bs-target="#info"]');
+
+            if (legendButton) legendButton.addEventListener("click", function () {
+                var iC = bootstrap.Collapse.getInstance(document.querySelector("#instructionGuide"));
+                var nC = bootstrap.Collapse.getInstance(document.querySelector("#info"));
+                if (iC?._isShown) iC.hide(); if (nC?._isShown) nC.hide();
+            });
+            if (instructionButton) instructionButton.addEventListener("click", function () {
+                var lC = bootstrap.Collapse.getInstance(document.querySelector("#legend"));
+                var nC = bootstrap.Collapse.getInstance(document.querySelector("#info"));
+                if (lC?._isShown) lC.hide(); if (nC?._isShown) nC.hide();
+            });
+            if (infoButton) infoButton.addEventListener("click", function () {
+                var lC = bootstrap.Collapse.getInstance(document.querySelector("#legend"));
+                var iC = bootstrap.Collapse.getInstance(document.querySelector("#instructionGuide"));
+                if (lC?._isShown) lC.hide(); if (iC?._isShown) iC.hide();
+            });
+
+            try {
+                var now = new Date(); var year = now.getFullYear(); var month = (now.getMonth() + 1).toString().padStart(2, '0'); var day = now.getDate().toString().padStart(2, '0'); var hours = now.getHours().toString().padStart(2, '0'); var minutes = now.getMinutes().toString().padStart(2, '0'); var currentDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+                var endDateInput = document.getElementById("endTime");
+                if (endDateInput) endDateInput.setAttribute("max", currentDateTime);
+            } catch (e) { console.error("Errore imp. data max:", e); }
+
+            const restartTutorialBtn = document.getElementById("restartTutorial");
+            if (restartTutorialBtn) {
+                restartTutorialBtn.addEventListener("click", function () {
+                    localStorage.removeItem("tutorialCompleted_earthquake");
+                    introJs()
+                        .setOptions({
+                            steps: [
+                                { intro: "Benvenuto su Geo Shock Italia! Questo tutorial ti mostrerà come usare le funzioni principali. Clicca 'Avanti'." },
+                                { element: document.querySelector("#startTime"), intro: "<strong>1. Data Inizio:</strong> Seleziona data e ora di partenza (dal 01/01/2023 in poi).", position: "right" },
+                                { element: document.querySelector("#endTime"), intro: "<strong>2. Data Fine:</strong> Seleziona data e ora di fine (non futura).", position: "right" },
+                                { element: document.querySelector("#minMagnitude"), intro: "<strong>3. Magnitudo Minima:</strong> Imposta la soglia minima.", position: "right" },
+                                { element: document.querySelector("#radius"), intro: "<strong>4. Raggio:</strong> Scegli l'ampiezza dell'area (20, 50 o 100 km).", position: "right" },
+                                { element: document.querySelector("#map"), intro: "<strong>5. Seleziona Località:</strong> Clicca (o trascina il marker) sulla mappa per scegliere il centro.", position: "top" },
+                                { element: document.querySelector('#selectedLocation'), intro: "Qui vedi le coordinate e il nome della località scelta.", position: "top" },
+                                { element: document.querySelector('#earthquakeForm button[type="submit"]'), intro: "<strong>6. Avvia Ricerca:</strong> Clicca qui quando sei pronto!", position: "right" },
+                                { intro: "I risultati (mappa, grafico, tabella, statistiche, interpretazione) appariranno qui sotto." },
+                                { element: document.querySelector('#exportCSVBtn'), intro: "Usa questi pulsanti per <strong>Esportare</strong> i dati o iniziare una <strong>Nuova Ricerca</strong>.", position: "left" },
+                                { element: document.querySelector('[data-bs-target="#instructionGuide"]'), intro: "Consulta la <strong>Guida Rapida</strong> qui per un riepilogo dei passi.", position: "left" },
+                                { intro: "Tutorial completato!" }
+                            ],
+                            showStepNumbers: false, exitOnOverlayClick: false, showBullets: true, /* Mostra bullets */
+                            doneLabel: "Finito", nextLabel: "Avanti", prevLabel: "Indietro", skipLabel: "Salta"
+                        })
+                        .start()
+                        .oncomplete(function () { localStorage.setItem("tutorialCompleted_earthquake", true); })
+                        .onexit(function () { localStorage.setItem("tutorialCompleted_earthquake", true); });
+                });
+                if (!localStorage.getItem("tutorialCompleted_earthquake")) {
+                    setTimeout(() => { restartTutorialBtn.click(); }, 500);
+                }
+            }
+        });
+    </script>
+
+    <!-- Loader per PDF -->
+    <div id="pdfLoader" class="pdf-loader" style="display: none;">
+        <div class="spinner-border text-light" role="status"> <span class="visually-hidden">Generazione PDF...</span>
+        </div>
+        <p class="mt-3">Generazione PDF in corso...</p>
+    </div>
+    <div id="pdfError" class="pdf-error" style="display: none;">
+        <p>Si è verificato un errore durante la generazione del PDF. Riprova più tardi.</p>
+    </div>
+</body>
+
+</html>

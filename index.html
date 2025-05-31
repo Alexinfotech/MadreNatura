@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Madre Natura - Dashboard</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <!-- Intro.js CSS (opzionale, se vuoi il tutorial anche qui) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/5.1.0/introjs.min.css" />
+
+    <!-- CSS Personalizzato per la Dashboard -->
+    <link rel="stylesheet" href="styles_dashboard.css" />
+</head>
+
+<body>
+    <!-- Modal per Messaggi (POPUP), se vuoi gestire alert con lo stesso sistema -->
+    <div class="modal fade" id="alertModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static"
+        data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content custom-modal-content">
+                <div class="modal-header custom-modal-header">
+                    <h5 class="modal-title" id="alertModalLabel">Messaggio</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        id="closeModalBtn"></button>
+                </div>
+                <div class="modal-body custom-modal-body" id="alertModalBody">
+                    <!-- Testo del messaggio -->
+                </div>
+                <div class="modal-footer custom-modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Chiudi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fine Modal -->
+
+    <div class="container my-container">
+        <div class="header text-center">
+            <h1>
+                <i class="fas fa-globe spinning-icon"></i> Madre Natura - Dashboard
+            </h1>
+            <p class="lead">
+                Benvenuto nella Home di Madre Natura. Seleziona uno dei servizi disponibili.
+            </p>
+        </div>
+
+        <!-- Sezione di icone/collegamenti -->
+        <div class="row mt-5 justify-content-center">
+            <!-- Icona Terremoti -->
+            <div class="col-12 col-sm-6 col-md-4 mb-4">
+                <div class="card service-card" onclick="window.location.href='terremoti/index.html';">
+                    <div class="card-body text-center">
+                        <i class="fas fa-wave-square fa-3x mb-3"></i>
+                        <h5 class="card-title">Terremoti</h5>
+                        <p class="card-text">Visualizza il modulo dedicato ai terremoti.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Icona Meteo Attuale -->
+            <div class="col-12 col-sm-6 col-md-4 mb-4">
+                <div class="card service-card" onclick="window.location.href='meteo/meteo.php';">
+                    <div class="card-body text-center">
+                        <i class="fas fa-cloud-sun-rain fa-3x mb-3"></i>
+                        <h5 class="card-title">Meteo</h5>
+                        <p class="card-text">Scopri il meteo attuale sulle principali città.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Icona Previsioni Meteo -->
+            <div class="col-12 col-sm-6 col-md-4 mb-4">
+                <div class="card service-card" onclick="window.location.href='previsioni/previsioni.php';">
+                    <div class="card-body text-center">
+                        <i class="fas fa-cloud-sun fa-3x mb-3"></i>
+                        <h5 class="card-title">Previsioni Meteo</h5>
+                        <p class="card-text">Verifica le previsioni a breve e medio termine.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Icona Radiazione Solare & UV -->
+            <div class="col-12 col-sm-6 col-md-4 mb-4">
+                <div class="card service-card" onclick="window.location.href='radiazioni/uv.php';">
+                    <div class="card-body text-center">
+                        <i class="fas fa-sun fa-3x mb-3"></i>
+                        <h5 class="card-title">Radiazione Solare & UV</h5>
+                        <p class="card-text">Monitora i livelli di radiazione solare e UV.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Icona Qualità dell’Aria -->
+            <div class="col-12 col-sm-6 col-md-4 mb-4">
+                <div class="card service-card" onclick="window.location.href='aria/qualita_aria.php';">
+                    <div class="card-body text-center">
+                        <i class="fas fa-wind fa-3x mb-3"></i>
+                        <h5 class="card-title">Qualità dell’Aria</h5>
+                        <p class="card-text">Analizza i livelli di inquinamento e pollini.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Icona Storico Meteo/Clima -->
+            <div class="col-12 col-sm-6 col-md-4 mb-4">
+                <div class="card service-card" onclick="window.location.href='storico/index_storico.html';">
+                    <div class="card-body text-center">
+                        <i class="fas fa-history fa-3x mb-3"></i>
+                        <h5 class="card-title">Storico Meteo/Clima</h5>
+                        <p class="card-text">Analizza dati storici.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Icona Orto -->
+            <div class="col-12 col-sm-6 col-md-4 mb-4">
+                <div class="card service-card" onclick="window.location.href='orto/coltivazione.html';">
+                    <div class="card-body text-center">
+                        <i class="fas  fa-seedling fa-3x mb-3"></i>
+                        <h5 class="card-title">Coltivazione</h5>
+                        <p class="card-text">Assistente coltivatore.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS bundle -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <!-- Intro.js JS (opzionale) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/5.1.0/intro.min.js"></script>
+    <!-- Script per popup di alert (opzionale) -->
+    <script src="alerts_dashboard.js"></script>
+    <!-- Script personalizzato -->
+    <script src="scripts_dashboard.js"></script>
+</body>
+
+</html>

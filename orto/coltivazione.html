@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistente Giardinaggio - Madre Natura</title>
+
+    <!-- Bootstrap CSS (SENZA integrity/crossorigin) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" />
+    <!-- Font Awesome (SENZA integrity/crossorigin - Anche se meno problematico per i font) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <!-- CSS Personalizzato (IL TUO FILE ORIGINALE!) -->
+    <link rel="stylesheet" href="coltivazione_styles.css" />
+    <style>
+        /* Stili aggiuntivi minimi per risultati query (USA QUELLI DEL TUO CSS SE GIÀ PRESENTI) */
+        #query-results-area .card {
+            margin-bottom: 1rem;
+        }
+
+        #query-results-area .card-header {
+            font-weight: bold;
+        }
+
+        #query-results-area mark {
+            background-color: #ffec80;
+            padding: 0.1em;
+        }
+
+        .result-link-source {
+            font-size: 0.8em;
+            text-align: right;
+            margin-top: 0.5rem;
+            display: block;
+            color: #888;
+        }
+
+        .result-link-source a {
+            color: #6f42c1;
+            text-decoration: none;
+        }
+
+        .result-link-source a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Modal (Struttura come prima) -->
+    <div class="modal fade" id="alertModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static"
+        data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content custom-modal-content">
+                <div class="modal-header custom-modal-header">
+                    <h5 class="modal-title" id="alertModalLabel">Messaggio</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body custom-modal-body" id="alertModalBody"></div>
+                <div class="modal-footer custom-modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar (Struttura come prima) -->
+        <div class="bg-dark border-end" id="sidebar-wrapper">
+            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
+                <i class="fas fa-seedling me-2 spinning-icon"></i>Madre Natura
+            </div>
+            <div class="list-group list-group-flush my-3" id="sidebar-nav">
+                <a href="#home" class="list-group-item list-group-item-action bg-transparent second-text active"
+                    data-view="home"><i class="fas fa-comments me-2"></i>Chiedi all'Assistente</a>
+                <a href="#index" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"
+                    data-view="index"><i class="fas fa-list me-2"></i>Indice Guida Completa</a>
+                <a href="#plant-calendar"
+                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"
+                    data-view="plant-calendar"><i class="fas fa-calendar-days me-2"></i>Calendario Colture</a>
+                <a href="#lunar-calendar"
+                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"
+                    data-view="lunar-calendar"><i class="far fa-calendar-alt me-2"></i>Calendario Lunare</a>
+                <hr class="sidebar-divider">
+                <span class="list-group-item bg-transparent second-text text-muted small text-uppercase">Sezioni
+                    Guida</span>
+                <div id="sidebar-guide-links-container"></div>
+            </div>
+        </div>
+
+        <!-- Page Content (Struttura come prima) -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4 sticky-top">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
+                    <h2 class="fs-2 m-0" id="view-title">Chiedi all'Assistente</h2>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0"></ul>
+                </div>
+            </nav>
+            <div class="container-fluid px-4">
+                <div id="main-content">
+                    <div id="loadingSpinner" class="d-flex justify-content-center align-items-center"
+                        style="min-height: 70vh;">
+                        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"><span
+                                class="visually-hidden">Caricamento...</span></div>
+                        <p class="mt-2 ms-3 fs-4">Caricamento assistente...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script JS (SENZA integrity/crossorigin per CDN) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/it.min.js"></script>
+    <!-- Script Principale -->
+    <script src="coltivazione_scripts.js"></script>
+
+    <script>
+        // Script per toggle sidebar (come prima)
+        var el = document.getElementById("wrapper");
+        var toggleButton = document.getElementById("menu-toggle");
+        if (el && toggleButton) toggleButton.onclick = function () { el.classList.toggle("toggled"); };
+        // Questa riga causava l'errore "moment is not defined" perché moment.js era bloccato
+        // Ora dovrebbe funzionare dopo aver rimosso integrity
+        try {
+            moment.locale('it');
+        } catch (e) {
+            console.error("Errore nell'impostare il locale di Moment.js:", e);
+            // Potresti voler mostrare un messaggio all'utente qui se Moment non si è caricato
+            const mainContentEl = document.getElementById('main-content');
+            if (mainContentEl && mainContentEl.innerHTML.includes('spinner')) { // Mostra solo se non c'è ancora contenuto
+                mainContentEl.innerHTML = '<div class="alert alert-danger">Errore critico: Impossibile caricare le librerie necessarie. Ricarica la pagina o controlla la connessione.</div>';
+            } else if (mainContentEl) {
+                // Aggiungi un piccolo banner di errore non bloccante
+                const errorBanner = document.createElement('div');
+                errorBanner.className = 'alert alert-warning alert-dismissible fade show small p-2';
+                errorBanner.role = 'alert';
+                errorBanner.innerHTML = '<strong>Attenzione:</strong> Alcune funzionalità (es. date) potrebbero non funzionare correttamente. <button type="button" class="btn-close btn-sm p-1" data-bs-dismiss="alert" aria-label="Close"></button>';
+                mainContentEl.prepend(errorBanner);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

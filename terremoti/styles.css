@@ -1,0 +1,219 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Base */
+body {
+    background: linear-gradient(135deg, #3d2645, #bda2c8);
+    font-family: 'Roboto', sans-serif;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    transition: background-color 0.5s ease;
+}
+
+/* Contenitore principale */
+.my-container {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 1100px;
+    margin: 20px auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    animation: fadeIn 1s ease-in-out;
+    position: relative;
+}
+
+.form-label {
+    font-weight: bold;
+    color: #ccc;
+}
+
+/* Pulsante principale */
+.btn-primary {
+    background-color: #ff006e;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #d10057;
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(255, 0, 110, 0.6);
+}
+
+.btn-info {
+    background-color: #00b4d8;
+    border: none;
+}
+
+.btn-info:hover {
+    background-color: #0077b6;
+    box-shadow: 0 0 10px rgba(0, 180, 216, 0.6);
+}
+
+/* Header */
+.header {
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 2.4em;
+    font-weight: bold;
+    color: #ffd6ff;
+}
+
+/* Icona rotante */
+.spinning-icon {
+    color: #ffd6ff;
+    animation: spin 6s linear infinite;
+}
+
+/* Contenitore Grafico */
+.chart-container {
+    width: 100%;
+    margin-top: 30px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+canvas {
+    width: 100% !important;
+}
+
+/* Mappa */
+#map {
+    border: 2px solid #444;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Card */
+.card {
+    background-color: #2c2c2c;
+    color: #f0f0f0;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    animation: slideIn 1s ease-in-out;
+}
+
+/* Tabella */
+.table {
+    margin-top: 20px;
+    background-color: #363636;
+    color: #ffffff;
+    border: none;
+    table-layout: fixed;
+    word-wrap: break-word;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.table th,
+.table td {
+    text-align: center;
+    border: 1px solid #555;
+    vertical-align: middle;
+    padding: 8px;
+}
+
+/* Spinner */
+.spinner-border {
+    margin: 20px auto;
+    display: block;
+}
+
+/* Animazioni */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Intro.js personalizzazione */
+.introjs-tooltip {
+    background-color: #343a40 !important;
+    color: #ffffff !important;
+    border-radius: 10px !important;
+}
+
+.introjs-tooltiptext {
+    color: #ffffff !important;
+}
+
+.introjs-helperLayer,
+.introjs-overlay {
+    background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Loader PDF */
+.pdf-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 13, 13, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.pdf-error {
+    color: red;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* Modal personalizzato */
+.custom-modal-content {
+    background: #262626;
+    color: #f7f7f7;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+.custom-modal-header,
+.custom-modal-footer {
+    border: none;
+    background: #1f1f1f;
+}
+
+/* Corpo del Modal */
+.custom-modal-body {
+    background: #262626;
+    color: #f7f7f7;
+}
+
+/* Fine Modal personalizzato */
+/*FUNZIOANTE*/

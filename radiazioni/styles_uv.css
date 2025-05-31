@@ -1,0 +1,367 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Base */
+body {
+    /* === Applied Purple Theme Gradient === */
+    background: linear-gradient(135deg, #3d2645, #bda2c8);
+    font-family: 'Roboto', sans-serif;
+    /* === Applied Purple Theme Text Color === */
+    color: #f0f0f0;
+    margin: 0;
+    padding: 15px 0;
+    min-height: 100vh;
+}
+
+.my-container {
+    /* === Applied Purple Theme Container Style === */
+    background: rgba(0, 0, 0, 0.5);
+    /* Consistent with theme */
+    padding: 25px;
+    /* Kept padding from original UV CSS */
+    border-radius: 12px;
+    /* Theme radius */
+    max-width: 1100px;
+    /* Kept width from original UV CSS */
+    margin: 20px auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    /* Theme shadow */
+    position: relative;
+}
+
+/* Header */
+.header {
+    margin-bottom: 25px;
+    /* Kept margin */
+    padding-bottom: 15px;
+    /* === Removed Border === */
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2.2em;
+    /* Kept size */
+    font-weight: 700;
+    /* === Applied Purple Theme Header Color === */
+    color: #ffd6ff;
+    margin-bottom: 0.4rem;
+    /* Kept margin */
+}
+
+.header p.lead {
+    font-size: 1.05em;
+    /* Kept size */
+    /* === Applied Purple Theme Base Text Color === */
+    color: #f0f0f0;
+}
+
+.spinning-icon {
+    /* === Applied Purple Theme Icon Color === */
+    color: #ffd6ff;
+    animation: spin 6s linear infinite;
+    /* Theme speed */
+    margin-right: 10px;
+    /* Kept margin */
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Sezione Ricerca */
+#searchSection {
+    /* === Adjusted Search Section Border/Background === */
+    border: 1px solid rgba(255, 214, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    /* Kept radius from original UV CSS */
+    padding: 1rem 1.5rem;
+    /* Kept padding */
+}
+
+#searchSection .form-label {
+    font-weight: 500;
+    color: #f0f0f0;
+    /* Theme text color */
+}
+
+#searchSection .form-control,
+#searchSection .form-select {
+    /* === Adjusted Input Background/Border/Text === */
+    background-color: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 214, 255, 0.3);
+    color: #f0f0f0;
+}
+
+#searchSection .form-control::placeholder {
+    color: #bdbdbd;
+    /* Lighter placeholder */
+}
+
+#searchSection .form-control:focus,
+#searchSection .form-select:focus {
+    /* === Adjusted Input Focus Style === */
+    background-color: rgba(0, 0, 0, 0.4);
+    border-color: #ff006e;
+    /* Theme primary color */
+    box-shadow: 0 0 0 0.25rem rgba(255, 0, 110, 0.3);
+    /* Theme primary glow */
+    color: #f0f0f0;
+}
+
+/* === Primary Button (Search) - Applied Purple Theme Style === */
+#searchSection .btn-primary {
+    background-color: #ff006e;
+    border: none;
+    /* Remove border */
+    color: #f0f0f0;
+    /* Light text */
+}
+
+#searchSection .btn-primary:hover {
+    background-color: #d10057;
+    box-shadow: 0 0 10px rgba(255, 0, 110, 0.5);
+}
+
+/* === Info Button (Geo) - Adjusted Style === */
+#searchSection .btn-info {
+    background-color: #9c7cac;
+    border: none;
+    /* Remove border */
+    color: #f0f0f0;
+    /* Light text */
+}
+
+#searchSection .btn-info:hover {
+    background-color: #816391;
+    box-shadow: 0 0 8px rgba(189, 162, 200, 0.4);
+}
+
+/* === Forecast Days Selection Button Group - Applied Theme === */
+#forecastDaysSelection .btn-group .btn {
+    border-color: rgba(255, 214, 255, 0.4);
+    /* Subtle pink border */
+    color: #f0f0f0;
+    /* Light text */
+    background-color: rgba(0, 0, 0, 0.3);
+    /* Dark background */
+}
+
+#forecastDaysSelection .btn-group .btn:hover {
+    background-color: rgba(255, 0, 110, 0.1);
+    /* Subtle pink hover */
+    border-color: rgba(255, 214, 255, 0.6);
+}
+
+#forecastDaysSelection .btn-group .btn.active {
+    background-color: #ff006e;
+    /* Theme primary color */
+    border-color: #ff006e;
+    color: #f0f0f0;
+    /* Light text on active */
+    box-shadow: none;
+    /* Remove default active shadow if needed */
+}
+
+/* Sezioni Contenuto */
+.forecast-section h2 {
+    color: #ffd6ff;
+    /* Theme header color */
+    border-bottom: 1px solid rgba(255, 214, 255, 0.25);
+    /* Theme border */
+    padding-bottom: 0.5rem;
+    text-align: center;
+}
+
+/* === Tabella UV Iniziale & Riepilogo Giornaliero - Applied Theme === */
+.initial-uv-table,
+.daily-summary-table {
+    margin-top: 1rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Theme dark background */
+    border: 1px solid rgba(255, 214, 255, 0.2);
+    /* Theme border */
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 0.95em;
+    color: #f0f0f0;
+    /* Ensure base text color */
+}
+
+.initial-uv-table thead th,
+.daily-summary-table thead th {
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Darker header */
+    border-bottom: 2px solid rgba(255, 214, 255, 0.3);
+    /* Theme border */
+    color: #ffd6ff;
+    /* Theme header color */
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.6rem 0.5rem;
+    font-weight: 500;
+}
+
+.initial-uv-table tbody td,
+.daily-summary-table tbody td {
+    border-color: rgba(255, 214, 255, 0.15);
+    /* Theme grid lines */
+    vertical-align: middle;
+    padding: 0.5rem;
+}
+
+.initial-uv-table tbody tr:hover,
+.daily-summary-table tbody tr:hover {
+    background-color: rgba(255, 0, 110, 0.1);
+    /* Theme row hover */
+}
+
+/* Add styles for UV index colors within tables if set by JS */
+/* Example: */
+.initial-uv-table .uv-low,
+.daily-summary-table .uv-low {
+    /* Assume JS adds classes like uv-low, uv-moderate etc. */
+    background-color: #4caf50;
+    /* Green */
+    color: #fff;
+}
+
+.initial-uv-table .uv-moderate,
+.daily-summary-table .uv-moderate {
+    background-color: #ffeb3b;
+    /* Yellow */
+    color: #333;
+}
+
+.initial-uv-table .uv-high,
+.daily-summary-table .uv-high {
+    background-color: #ff9800;
+    /* Orange */
+    color: #fff;
+}
+
+.initial-uv-table .uv-very-high,
+.daily-summary-table .uv-very-high {
+    background-color: #f44336;
+    /* Red */
+    color: #fff;
+}
+
+.initial-uv-table .uv-extreme,
+.daily-summary-table .uv-extreme {
+    background-color: #9c27b0;
+    /* Purple */
+    color: #fff;
+}
+
+
+/* === Contenitore Grafico Styling - Applied Theme === */
+.chart-container {
+    border: 1px solid rgba(255, 214, 255, 0.15);
+    /* Theme border */
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    /* Theme dark bg */
+    border-radius: 8px;
+    position: relative;
+    height: 350px;
+    /* Kept height from original UV CSS */
+}
+
+.chart-container h4 {
+    color: #ffd6ff;
+    /* Theme header color */
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+#uvRadiationChart {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
+/* Loader Globale */
+#loadingSpinner {
+    color: #ffd6ff;
+    /* Theme color */
+    text-align: center;
+}
+
+#loadingSpinner .spinner-border {
+    border-color: currentColor;
+    border-right-color: transparent;
+}
+
+/* === Modal Styling - Applied Purple Theme Style === */
+.custom-modal-content {
+    background: #262626;
+    color: #f7f7f7;
+    border-radius: 10px;
+    border: none;
+    /* Removed border */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
+}
+
+.custom-modal-header {
+    border-bottom: none;
+    /* Removed border */
+    background: #1f1f1f;
+    color: #f0f0f0;
+    /* Consistent modal header text */
+}
+
+.custom-modal-header .btn-close-white {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.custom-modal-footer {
+    border-top: none;
+    /* Removed border */
+    background: #1f1f1f;
+}
+
+.custom-modal-body {
+    background: #262626;
+    color: #f7f7f7;
+    padding: 1.5rem;
+}
+
+/* Responsive (Kept from original UV CSS) */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2em;
+    }
+
+    .my-container {
+        margin: 15px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .header h1 {
+        font-size: 1.8em;
+    }
+
+    .my-container {
+        padding: 15px;
+    }
+
+    #searchSection .btn {
+        font-size: 0.9em;
+        padding: 0.375rem 0.75rem;
+    }
+
+    #searchSection .form-label {
+        font-size: 0.9em;
+    }
+}

@@ -1,0 +1,542 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Base (INVARIATO) */
+body {
+    background: linear-gradient(135deg, #2c1e3e, #6c5b7b);
+    font-family: 'Roboto', sans-serif;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 15px 0;
+    min-height: 100vh;
+}
+
+.my-container {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 1200px;
+    margin: 20px auto;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+    position: relative;
+}
+
+/* Header (INVARIATO) */
+.header {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: #e1bee7;
+    margin-bottom: 0.4rem;
+}
+
+.header p.lead {
+    font-size: 1.05em;
+    color: #d1c4e9;
+}
+
+.spinning-icon {
+    color: #e1bee7;
+    animation: spin 7s linear infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Sezione Ricerca (INVARIATO) */
+#searchSection {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+}
+
+#searchSection .form-label {
+    font-weight: 500;
+    color: #e0e0e0;
+}
+
+#searchSection .form-control,
+#searchSection .form-select {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+}
+
+#searchSection .form-control::placeholder {
+    color: #bbb;
+}
+
+#searchSection .form-control:focus,
+#searchSection .form-select:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: #e1bee7;
+    box-shadow: 0 0 0 0.25rem rgba(225, 190, 231, 0.25);
+    color: #fff;
+}
+
+#searchSection .btn-primary {
+    background-color: #ab47bc;
+    border-color: #ab47bc;
+}
+
+#searchSection .btn-primary:hover {
+    background-color: #8e24aa;
+    border-color: #7b1fa2;
+}
+
+#searchSection .btn-info {
+    background-color: #4fc3f7;
+    border-color: #4fc3f7;
+}
+
+#searchSection .btn-info:hover {
+    background-color: #29b6f6;
+    border-color: #03a9f4;
+}
+
+#forecastTypeSelection .btn-group .btn {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #eee;
+}
+
+#forecastTypeSelection .btn-group .btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#forecastTypeSelection .btn-group .btn.active {
+    background-color: #ab47bc;
+    border-color: #ab47bc;
+    color: #fff;
+}
+
+/* Sezioni Contenuto (Titolo h2) (INVARIATO) */
+.forecast-section h2 {
+    color: #e1bee7;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 0.5rem;
+    text-align: center;
+}
+
+/* Tabella Previsioni Iniziali (INVARIATO tranne icon size) */
+.initial-forecast-table {
+    margin-top: 1rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 0.9em;
+}
+
+.initial-forecast-table thead th {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5rem 0.4rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.initial-forecast-table tbody td {
+    border-color: rgba(255, 255, 255, 0.15);
+    vertical-align: middle;
+    padding: 0.4rem;
+}
+
+.initial-forecast-table .city-name-cell {
+    font-weight: 700;
+    text-align: left;
+    white-space: nowrap;
+    background-color: rgba(255, 255, 255, 0.05);
+    position: sticky;
+    left: 0;
+    z-index: 1;
+}
+
+.initial-forecast-table .day-forecast-cell {
+    min-width: 85px;
+    /* Aumentato per ospitare icona più grande */
+    text-align: center;
+}
+
+/* *** MODIFICA ICON SIZE *** */
+.initial-forecast-table .weather-icon-small {
+    width: 60px;
+    /* Aumentato a 60px */
+    height: 60px;
+    /* Aumentato a 60px */
+    display: block;
+    margin: 3px auto;
+    /* Leggermente più margine */
+}
+
+.initial-forecast-table .temp-max {
+    font-weight: 500;
+    color: #f8bbd0;
+}
+
+.initial-forecast-table .temp-min {
+    color: #bbdefb;
+}
+
+.initial-forecast-table .wind-info,
+.initial-forecast-table .uv-info {
+    font-size: 0.85em;
+    color: #ccc;
+    margin-top: 3px;
+    /* Leggero aumento margine */
+    white-space: nowrap;
+}
+
+.table-responsive {
+    border-radius: 8px;
+}
+
+/* Accordion Card Dettaglio (7 giorni) (INVARIATO tranne icon size e padding/colonne?) */
+.accordion-item.forecast-card-detail {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 0.5rem;
+    border-radius: 8px !important;
+    overflow: hidden;
+    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+    will-change: transform;
+}
+
+.accordion-item.forecast-card-detail.card-zoomed {
+    transform: scale(1.03);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+    z-index: 10;
+    border-color: rgba(225, 190, 231, 0.5);
+}
+
+.forecast-card-detail .accordion-header {
+    padding: 0;
+}
+
+.forecast-card-detail .accordion-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-weight: 500;
+    /* Padding potrebbe necessitare aggiustamento per altezza icona */
+    padding: 0.5rem 1rem;
+    /* Ridotto leggermente verticalmente per compensare altezza icona? O lasciare 0.7rem */
+    min-height: 70px;
+    /* Assicura altezza minima per contenere icona */
+    border-radius: 0 !important;
+    box-shadow: none;
+    /* display: flex e align-items-center sono gestiti da Bootstrap, dovrebbero centrare verticalmente */
+}
+
+.forecast-card-detail .accordion-button:not(.collapsed) {
+    background-color: rgba(171, 71, 188, 0.3);
+    color: #fff;
+}
+
+.forecast-card-detail .accordion-button::after {
+    filter: brightness(0) invert(1);
+    align-self: center;
+    /* Aiuta ad allineare la freccia con gli altri elementi */
+}
+
+.forecast-card-detail .accordion-button:focus {
+    box-shadow: none;
+}
+
+.forecast-card-detail .accordion-body {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* --- Stili Colonne Interne (USATI SIA DA 7 GIORNI CHE DA 14 GIORNI) --- */
+/* Potrebbe essere necessario aumentare flex-basis per date/temp */
+.forecast-card-detail .date-col,
+.forecast-card-basic .list-group-item .date-col {
+    flex-basis: 110px;
+    /* Aumentato leggermente? */
+    flex-shrink: 0;
+    font-weight: 700;
+    color: #fff;
+    align-self: center;
+    /* Centra verticalmente */
+}
+
+.forecast-card-detail .temp-col,
+.forecast-card-basic .list-group-item .temp-col {
+    flex-basis: 150px;
+    /* Aumentato leggermente? */
+    flex-shrink: 0;
+    text-align: right;
+    align-self: center;
+    /* Centra verticalmente */
+}
+
+.forecast-card-detail .precip-col {
+    flex-basis: 110px;
+    flex-shrink: 0;
+    text-align: right;
+    align-self: center;
+}
+
+.forecast-card-detail .wind-col,
+.forecast-card-basic .list-group-item .wind-col {
+    flex-basis: 130px;
+    flex-shrink: 0;
+    text-align: right;
+    align-self: center;
+}
+
+.forecast-card-detail .uv-col,
+.forecast-card-basic .list-group-item .uv-col {
+    flex-basis: 120px;
+    flex-shrink: 0;
+    text-align: right;
+    align-self: center;
+}
+
+.forecast-card-detail i.fas,
+.forecast-card-basic .list-group-item i.fas {
+    color: #d8bfd8;
+    margin-right: 3px;
+    vertical-align: middle;
+    /* Aiuta con l'allineamento */
+}
+
+/* *** MODIFICA ICON SIZE *** */
+.forecast-card-detail .weather-icon-small,
+.forecast-card-basic .list-group-item .weather-icon-small {
+    width: 60px;
+    /* Aumentato a 60px */
+    height: 60px;
+    /* Aumentato a 60px */
+    vertical-align: middle;
+    margin: 0 0.8rem;
+    /* Aumentato margine orizzontale */
+    flex-shrink: 0;
+    /* Impedisce all'icona di rimpicciolirsi */
+}
+
+.forecast-card-detail .accordion-button .temp-col {
+    /* Invariato */
+}
+
+.forecast-card-detail .accordion-button .temp-col .text-muted {
+    color: #bbb !important;
+}
+
+/* Stile VISIVO per Lista Base 14 Giorni (INVARIATO tranne icon size e padding/colonne?) */
+ul.forecast-card-basic {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+ul.forecast-card-basic .list-group-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #f0f0f0;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    /* Ridotto padding verticale come accordion button? */
+    min-height: 70px;
+    /* Altezza minima come accordion button */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    transition: background-color 0.2s ease;
+    /* display: flex, justify-content-between, align-items-center sono applicati dal JS */
+    /* align-items: center dovrebbe centrare verticalmente gli elementi */
+}
+
+ul.forecast-card-basic .list-group-item:last-child {
+    border-bottom: none;
+}
+
+ul.forecast-card-basic .list-group-item:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+ul.forecast-card-basic .list-group-item .temp-col .text-danger {
+    color: #f8bbd0 !important;
+}
+
+ul.forecast-card-basic .list-group-item .temp-col .text-primary {
+    color: #bbdefb !important;
+}
+
+/* Grafico (INVARIATO) */
+.hourly-chart {
+    max-height: 250px;
+}
+
+/* Loader Globale (INVARIATO) */
+#loadingSpinner {
+    color: #e1bee7;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+#loadingSpinner .spinner-border {
+    border-color: currentColor;
+    border-right-color: transparent;
+}
+
+/* Modal (INVARIATO) */
+.custom-modal-content {
+    background: #262626;
+    color: #f7f7f7;
+    border-radius: 10px;
+    border: 1px solid #444;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
+}
+
+.custom-modal-header {
+    border-bottom: 1px solid #444;
+    background: #1f1f1f;
+    color: #e1bee7;
+}
+
+.custom-modal-header .btn-close-white {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.custom-modal-footer {
+    border-top: 1px solid #444;
+    background: #1f1f1f;
+}
+
+.custom-modal-body {
+    background: #262626;
+    color: #f7f7f7;
+    padding: 1.5rem;
+}
+
+/* Responsive (Necessita verifica con icone 60px) */
+@media (max-width: 992px) {
+    #initialForecasts .table-responsive {
+        font-size: 0.85em;
+    }
+
+    .initial-forecast-table .day-forecast-cell {
+        min-width: 80px;
+        /* Potrebbe servire aggiustare */
+    }
+}
+
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2em;
+    }
+
+    .my-container {
+        margin: 15px;
+        padding: 20px;
+    }
+
+    /* Colonne nascoste (INVARIATO) */
+    .forecast-card-detail .accordion-button .wind-col,
+    .forecast-card-detail .accordion-button .uv-col,
+    .forecast-card-detail .accordion-button .precip-col {
+        display: none !important;
+    }
+
+    ul.forecast-card-basic .list-group-item .wind-col,
+    ul.forecast-card-basic .list-group-item .uv-col {
+        display: none !important;
+    }
+
+    /* Riduciamo un po' l'icona su tablet? O lasciamo 60px? */
+    /*
+    .initial-forecast-table .weather-icon-small,
+    .forecast-card-detail .weather-icon-small,
+    .forecast-card-basic .list-group-item .weather-icon-small {
+        width: 50px; height: 50px; margin: 0 0.6rem;
+    }
+    */
+}
+
+@media (max-width: 576px) {
+    .header h1 {
+        font-size: 1.8em;
+    }
+
+    .my-container {
+        padding: 15px;
+    }
+
+    #searchSection .btn {
+        font-size: 0.9em;
+        padding: 0.375rem 0.75rem;
+    }
+
+    #searchSection .form-label {
+        font-size: 0.9em;
+    }
+
+    /* Tabella iniziale su mobile molto piccolo */
+    .initial-forecast-table th,
+    .initial-forecast-table td {
+        white-space: nowrap !important;
+        padding: 0.2rem;
+        /* Riduci ancora padding */
+        font-size: 0.85em;
+        /* Riduci ancora font */
+    }
+
+    .initial-forecast-table .day-forecast-cell {
+        min-width: 70px;
+        /* Forse ancora troppo piccolo per 60px icona? */
+    }
+
+    /* Decisamente ridurre icone qui */
+    .initial-forecast-table .weather-icon-small,
+    .forecast-card-detail .weather-icon-small,
+    .forecast-card-basic .list-group-item .weather-icon-small {
+        width: 40px;
+        height: 40px;
+        /* Riportiamo a 40px su mobile */
+        margin: 0 0.4rem;
+        /* Margine adatto a 40px */
+    }
+
+    /* Riduci padding/min-height ora che icone sono più piccole */
+    .forecast-card-detail .accordion-button,
+    ul.forecast-card-basic .list-group-item {
+        padding: 0.6rem 0.8rem;
+        min-height: 55px;
+        /* Abbassiamo min-height */
+    }
+
+    /* Colonne nascoste (INVARIATO) */
+    .forecast-card-detail .accordion-button .text-muted {
+        display: none;
+    }
+
+    /* flex-basis per mobile (INVARIATO) */
+    .forecast-card-detail .date-col,
+    .forecast-card-basic .list-group-item .date-col {
+        flex-basis: 80px;
+    }
+
+    .forecast-card-detail .temp-col,
+    .forecast-card-basic .list-group-item .temp-col {
+        flex-basis: 100px;
+    }
+}

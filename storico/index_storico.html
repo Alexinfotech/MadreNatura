@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Madre Natura - Cambiamento Climatico</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- CSS personalizzato -->
+    <link rel="stylesheet" href="styles_storico.css" />
+</head>
+
+<body>
+
+    <!-- Modal per Messaggi -->
+    <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content custom-modal-content">
+                <div class="modal-header custom-modal-header">
+                    <h5 class="modal-title" id="alertModalLabel">Messaggio</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body custom-modal-body" id="alertModalBody"></div>
+                <div class="modal-footer custom-modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fine Modal -->
+
+    <div class="container my-container">
+        <header class="header text-center mb-4">
+            <h1><i class="fas fa-chart-line spinning-icon"></i> Cambiamento Climatico (1980-2024)</h1>
+            <p class="lead">Visualizza l'andamento della temperatura massima giornaliera per diversi modelli climatici.
+            </p>
+        </header>
+
+        <!-- Sezione Ricerca -->
+        <section id="searchSection" class="mb-4 p-3 rounded shadow-sm">
+            <form id="historicalSearchForm" class="row g-3 align-items-end" novalidate>
+                <!-- Input Città -->
+                <div class="col-md-8 col-lg-9">
+                    <label for="citySearchInput" class="form-label">Cerca Città</label>
+                    <input type="text" class="form-control form-control-lg" id="citySearchInput"
+                        placeholder="Es: Roma, Milano..." required>
+                    <div class="invalid-feedback">Inserisci un nome di città valido.</div>
+                </div>
+
+                <!-- Pulsanti Geoloc e Cerca -->
+                <div class="col-md-4 col-lg-3 d-flex align-items-end">
+                    <button type="button" class="btn btn-info btn-lg me-2" id="geoButton" title="Usa la tua posizione">
+                        <i class="fas fa-map-marker-alt"></i></button>
+                    <button type="submit" class="btn btn-primary btn-lg flex-grow-1" title="Mostra Grafico"><i
+                            class="fas fa-search"></i> Mostra</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Indicatore di Caricamento Globale -->
+        <div id="loadingSpinner" class="text-center my-5" style="display: none;">
+            <div class="spinner-border text-light" role="status" style="width: 3rem; height: 3rem;">
+                <span class="visually-hidden">Caricamento...</span>
+            </div>
+            <p class="mt-2">Caricamento dati climatici...</p>
+        </div>
+
+        <!-- Risultati (Solo Grafico) -->
+        <section id="historicalResults" class="mt-4 results-section" style="display: none;">
+            <h3 id="resultsTitle" class="text-center"></h3>
+            <div id="chartContainer" class="chart-container mb-4" style="display: none;">
+                <canvas id="climateChart"></canvas>
+            </div>
+            <div id="resultsMessagePlaceholder"></div>
+        </section>
+
+        <div id="resultsPlaceholder" class="results-placeholder text-center text-muted p-5 mt-4"
+            style="display: block;">
+            <i class="fas fa-thermometer-three-quarters fa-3x mb-3"></i><br>
+            Cerca una località per visualizzare l'andamento storico/proiezione della temperatura massima.
+        </div>
+
+    </div> <!-- fine .my-container -->
+
+    <!-- Script Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/it.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.1/dist/chartjs-adapter-moment.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="alerts_storico.js"></script> <!-- Alert Manager (using Modal) -->
+    <script src="scripts_storico.js"></script> <!-- Main application logic -->
+
+    <script>
+        // Initialize Moment.js locale
+        moment.locale('it');
+    </script>
+</body>
+
+</html>

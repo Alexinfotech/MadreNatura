@@ -1,0 +1,314 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+/* Using 500/700 weights from original */
+
+/* Base */
+body {
+    /* === Applied Purple Theme Gradient === */
+    background: linear-gradient(135deg, #3d2645, #bda2c8);
+    font-family: 'Roboto', sans-serif;
+    /* === Applied Purple Theme Text Color === */
+    color: #f0f0f0;
+    margin: 0;
+    padding: 15px 0;
+    /* Kept padding from original */
+    min-height: 100vh;
+}
+
+.my-container {
+    /* === Applied Purple Theme Container Style === */
+    background: rgba(0, 0, 0, 0.5);
+    /* Slightly less transparent than original */
+    padding: 30px;
+    border-radius: 12px;
+    /* Adjusted radius from theme */
+    max-width: 1300px;
+    /* Kept max-width from original */
+    margin: 20px auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    /* Adjusted shadow from theme */
+    position: relative;
+}
+
+/* Header */
+.header {
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    /* === Removed Border from original, matching theme === */
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.25); */
+    text-align: center;
+    /* Kept alignment */
+}
+
+.header h1 {
+    font-size: 2.4em;
+    font-weight: 700;
+    /* Kept weight from original */
+    /* === Applied Purple Theme Header Color === */
+    color: #ffd6ff;
+    margin-bottom: 0.5rem;
+    /* Kept margin */
+}
+
+.header p.lead {
+    font-size: 1.1em;
+    /* === Applied Purple Theme Base Text Color === */
+    color: #f0f0f0;
+    /* Using base text color for lead */
+}
+
+.spinning-icon {
+    /* === Applied Purple Theme Icon Color === */
+    color: #ffd6ff;
+    animation: spin 6s linear infinite;
+    /* Adjusted speed from theme */
+    margin-right: 12px;
+    /* Kept margin */
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Sezione Ricerca */
+#searchSection {
+    /* === Adjusted Search Section Border Color === */
+    border: 1px solid rgba(255, 214, 255, 0.2);
+    /* Subtle pink border */
+    /* === Darker Background to fit theme === */
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    padding: 1.25rem 1.75rem;
+}
+
+#searchSection .form-label {
+    font-weight: 500;
+    /* === Applied Purple Theme Text Color === */
+    color: #f0f0f0;
+    margin-bottom: 0.3rem;
+    font-size: 0.9em;
+}
+
+#searchSection .form-control,
+#searchSection .form-select {
+    /* === Adjusted Input Background/Border === */
+    background-color: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 214, 255, 0.3);
+    /* Subtle pink border */
+    /* === Applied Purple Theme Text Color === */
+    color: #f0f0f0;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+#searchSection .form-control::placeholder {
+    /* === Adjusted Placeholder Color === */
+    color: #bdbdbd;
+}
+
+#searchSection .form-control:focus,
+#searchSection .form-select:focus {
+    /* === Adjusted Input Focus Style === */
+    background-color: rgba(0, 0, 0, 0.4);
+    border-color: #ff006e;
+    /* Primary pink border on focus */
+    box-shadow: 0 0 0 0.25rem rgba(255, 0, 110, 0.3);
+    /* Primary pink glow */
+    color: #f0f0f0;
+}
+
+#searchSection .form-control-lg,
+#searchSection .form-select-lg {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+#searchSection .btn {
+    padding: 0.6rem 1rem;
+    font-size: 1em;
+    border: none;
+    /* Removed border from buttons like theme */
+}
+
+#searchSection .btn-lg {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    height: calc(1.5em + 1rem + 2px);
+    border: none;
+    /* Ensure no border */
+}
+
+/* === Primary Button (Search) - Applied Purple Theme Style === */
+#searchSection .btn-primary {
+    background-color: #ff006e;
+    border: none;
+    color: #f0f0f0;
+    /* Ensure text is light */
+}
+
+#searchSection .btn-primary:hover {
+    background-color: #d10057;
+    box-shadow: 0 0 10px rgba(255, 0, 110, 0.5);
+    /* Adjusted glow */
+}
+
+/* === Info Button (Geo) - Adjusted Style === */
+#searchSection .btn-info {
+    background-color: #9c7cac;
+    /* Muted purple */
+    border: none;
+    color: #f0f0f0;
+    /* Light text */
+}
+
+#searchSection .btn-info:hover {
+    background-color: #816391;
+    /* Darker muted purple */
+    box-shadow: 0 0 8px rgba(189, 162, 200, 0.4);
+    /* Subtle glow */
+}
+
+/* Sezione Risultati */
+.results-section {
+    /* === Adjusted Results Section Style === */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Darker bg */
+    border: 1px solid rgba(255, 214, 255, 0.2);
+    /* Subtle pink border */
+    border-radius: 10px;
+    padding: 1.5rem 2rem;
+    margin-top: 2rem;
+}
+
+.results-section h3 {
+    /* === Applied Purple Theme Header Color === */
+    color: #ffd6ff;
+    /* === Removed Border === */
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.25); */
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Placeholder when no search is done */
+#resultsPlaceholder {
+    opacity: 0.7;
+    /* Slightly more opaque */
+    display: block;
+    color: #bda2c8;
+    /* Use lighter purple from gradient */
+}
+
+/* Contenitore Grafico */
+.chart-container {
+    /* === Adjusted Chart Container Style === */
+    border: 1px solid rgba(255, 214, 255, 0.15);
+    /* Very subtle pink border */
+    padding: 1rem 1.5rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    /* Darker bg */
+    border-radius: 8px;
+    position: relative;
+    height: 450px;
+    display: none;
+}
+
+#climateChart {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Loader Globale */
+#loadingSpinner {
+    /* === Applied Purple Theme Color === */
+    color: #ffd6ff;
+    text-align: center;
+}
+
+#loadingSpinner .spinner-border {
+    border-color: currentColor;
+    border-right-color: transparent;
+}
+
+/* === Modal Styling - Applied Purple Theme Style === */
+.custom-modal-content {
+    background: #262626;
+    color: #f7f7f7;
+    border-radius: 10px;
+    /* === Removed border to match theme === */
+    border: none;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
+    /* Kept original shadow slightly darker */
+}
+
+.custom-modal-header {
+    /* === Removed border === */
+    border-bottom: none;
+    background: #1f1f1f;
+    color: #f0f0f0;
+    /* Adjusted text color */
+}
+
+.custom-modal-header .btn-close-white {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.custom-modal-footer {
+    /* === Removed border === */
+    border-top: none;
+    background: #1f1f1f;
+}
+
+.custom-modal-body {
+    background: #262626;
+    color: #f7f7f7;
+    padding: 1.5rem;
+}
+
+/* Responsive Adjustments (kept from original) */
+@media (max-width: 992px) {
+    /* Add specific adjustments if needed */
+}
+
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2em;
+    }
+
+    .my-container {
+        margin: 15px;
+        padding: 20px;
+    }
+
+    .chart-container {
+        height: 350px;
+    }
+}
+
+@media (max-width: 576px) {
+    .header h1 {
+        font-size: 1.8em;
+    }
+
+    .my-container {
+        padding: 15px;
+    }
+
+    #searchSection .btn {
+        font-size: 0.9em;
+        padding: 0.375rem 0.75rem;
+    }
+
+    #searchSection .form-label {
+        font-size: 0.9em;
+    }
+
+    .chart-container {
+        height: 300px;
+    }
+}
